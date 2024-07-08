@@ -2,9 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 
-import env from './utils/env.js';
+import contactsRouter from './routers/contacts.js';
 
-import { getContacts, getContactById } from './services/contacts.js';
+import notFoundHandler from './middlewares/notFoundHandler.js';
+import errorHandler from './middlewares/errorHandler.js';
+import env from './utils/env.js';
 
 const port = env('PORT', '3000');
 
@@ -22,48 +24,11 @@ const setupServer = () => {
   const corsMiddleware = cors();
   app.use(corsMiddleware);
 
-  app.get('/api/contacts', async (req, res) => {
-    const data = await getContacts();
+  app.use('/api/contacts', contactsRouter);
 
-    res.json({
-      status: 200,
-      data,
-      message: 'Successfully found contacts!',
-    });
-  });
+  app.use(notFoundHandler);
+  app.use(errorHandler);
 
-  app.get('/api/contacts/:contactId', async (req, res) => {
-    try {
-      const { contactId } = req.params;
-      const data = await getContactById(contactId);
-
-      if (!data) {
-        return res.status(404).json({
-          message: `Contact with id ${contactId} not found`,
-        });
-      }
-      res.json({
-        status: 200,
-        data,
-        message: `Successfully found contact with id ${contactId}!`,
-      });
-    } catch (error) {
-      if (error.message.includes('Cast to ObjectId failed')) {
-        error.status = 404;
-      }
-      const { status = 500 } = error;
-      res.status(status).json({
-        message: error.message,
-      });
-    }
-  });
-
-  app.use((req, res) => {
-    res.status(404).json({
-      status: 404,
-      message: 'Not found',
-    });
-  });
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
