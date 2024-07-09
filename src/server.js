@@ -24,6 +24,8 @@ const setupServer = () => {
   const corsMiddleware = cors();
   app.use(corsMiddleware);
 
+  app.use(express.json());
+
   app.use('/api/contacts', contactsRouter);
 
   app.use(notFoundHandler);
