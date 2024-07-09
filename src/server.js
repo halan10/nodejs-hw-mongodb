@@ -27,8 +27,8 @@ const setupServer = () => {
 
     res.json({
       status: 200,
-      data,
       message: 'Successfully found contacts!',
+      data,
     });
   });
 
@@ -44,8 +44,8 @@ const setupServer = () => {
       }
       res.json({
         status: 200,
-        data,
         message: `Successfully found contact with id ${contactId}!`,
+        data,
       });
     } catch (error) {
       if (error.message.includes('Cast to ObjectId failed')) {
