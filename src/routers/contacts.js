@@ -1,6 +1,7 @@
 import express from 'express';
 
 import ctrlWrapper from '../utils/ctrlWrapper.js';
+import validateBody from '../utils/validateBody.js';
 
 import {
   addContactController,
@@ -10,6 +11,7 @@ import {
   patchContactController,
 } from '../controllers/contacts.js';
 import isValidId from '../middlewares/isValidId.js';
+import { contactAddShema, contactUpdateShema } from '../validation/contacts.js';
 
 const contactsRouter = express.Router();
 
@@ -21,11 +23,16 @@ contactsRouter.get(
   ctrlWrapper(getContactByIdController),
 );
 
-contactsRouter.post('/', ctrlWrapper(addContactController));
+contactsRouter.post(
+  '/',
+  validateBody(contactAddShema),
+  ctrlWrapper(addContactController),
+);
 
 contactsRouter.patch(
   '/:contactId',
   isValidId,
+  validateBody(contactUpdateShema),
   ctrlWrapper(patchContactController),
 );
 

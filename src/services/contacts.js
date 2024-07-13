@@ -6,6 +6,7 @@ export const addConatct = (data) => Contact.create(data);
 export const updateContact = async (filter, data, option = {}) => {
   const result = await Contact.findOneAndUpdate(filter, data, {
     new: true,
+    runValidators: true,
     includeResultMetadata: true,
     ...option,
   });
