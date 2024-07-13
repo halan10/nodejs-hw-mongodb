@@ -1,7 +1,7 @@
 import express from 'express';
 
 import ctrlWrapper from '../utils/ctrlWrapper.js';
-import validateBody from '../utils/validateBody.js';
+import validateBody from '../middlewares/validateBody.js';
 
 import {
   addContactController,
