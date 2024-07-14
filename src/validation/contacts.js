@@ -21,6 +21,7 @@ export const contactAddShema = Joi.object({
     .messages({
       'string.email': 'Please enter a valid email address.',
     }),
+  isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...typeList),
 });
 
@@ -43,5 +44,6 @@ export const contactUpdateShema = Joi.object({
     .messages({
       'string.email': 'Please enter a valid email address.',
     }),
+  isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...typeList),
 });
