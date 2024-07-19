@@ -14,6 +14,9 @@ export const getContacts = async ({
 }) => {
   const skip = (page - 1) * perPage;
   const databaseQuery = Contact.find();
+  if (filter.userId) {
+    databaseQuery.where('userId').equals(filter.userId);
+  }
   if (filter.contactType) {
     databaseQuery.where('contactType').equals(filter.contactType);
   }
@@ -41,7 +44,7 @@ export const getContacts = async ({
     hasNextPage,
   };
 };
-export const getContactById = (id) => Contact.findById(id);
+export const getContact = (filter) => Contact.findOne(filter);
 export const addConatct = (data) => Contact.create(data);
 export const updateContact = async (filter, data, option = {}) => {
   const result = await Contact.findOneAndUpdate(filter, data, {

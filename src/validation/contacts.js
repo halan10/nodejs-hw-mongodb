@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { typeList, phoneNumberRegexp } from '../constants/contacts.js';
+import { emailRegexp } from '../constants/users-constants.js';
 
 export const contactAddShema = Joi.object({
   name: Joi.string().min(3).max(30).required().messages({
@@ -11,16 +12,9 @@ export const contactAddShema = Joi.object({
   phoneNumber: Joi.string().required().pattern(phoneNumberRegexp).messages({
     'string.pattern.base': `Phone number must have 12 digits and start with plus.`,
   }),
-  email: Joi.string()
-    .min(3)
-    .max(30)
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ['com', 'net'] },
-    })
-    .messages({
-      'string.email': 'Please enter a valid email address.',
-    }),
+  email: Joi.string().min(3).max(30).pattern(emailRegexp).messages({
+    'string.email': 'Please enter a valid email address.',
+  }),
   isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...typeList),
 });
@@ -34,16 +28,9 @@ export const contactUpdateShema = Joi.object({
   phoneNumber: Joi.string().pattern(phoneNumberRegexp).messages({
     'string.pattern.base': `Phone number must have 12 digits and start with plus.`,
   }),
-  email: Joi.string()
-    .min(3)
-    .max(30)
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ['com', 'net'] },
-    })
-    .messages({
-      'string.email': 'Please enter a valid email address.',
-    }),
+  email: Joi.string().min(3).max(30).pattern(emailRegexp).messages({
+    'string.email': 'Please enter a valid email address.',
+  }),
   isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...typeList),
 });

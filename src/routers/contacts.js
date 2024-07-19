@@ -3,6 +3,8 @@ import express from 'express';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import validateBody from '../middlewares/validateBody.js';
 
+import authenticate from '../middlewares/authenticate.js';
+
 import {
   addContactController,
   deleteContactController,
@@ -14,7 +16,7 @@ import isValidId from '../middlewares/isValidId.js';
 import { contactAddShema, contactUpdateShema } from '../validation/contacts.js';
 
 const contactsRouter = express.Router();
-
+contactsRouter.use(authenticate);
 contactsRouter.get('/', ctrlWrapper(getAllContactsController));
 
 contactsRouter.get(
