@@ -14,3 +14,9 @@ export const SMTP = {
 };
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
+
+export const TEMP_UPLOAD_DIR = path.resolve('src', 'temp');
+
+export const PUBLIC_DIR = path.resolve('src', 'public');
+
+export const PUBLIC_PHOTO_DIR = path.resolve('src', 'public', 'photos');
