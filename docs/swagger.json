@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "<127.0.0.1:3000>"
+      "url": "127.0.0.1:3000"
     },
     {
-      "url": "<https://nodejs-hw-mongodb-1occ.onrender.com/>"
+      "url": "https://nodejs-hw-mongodb-1occ.onrender.com"
     }
   ],
   "tags": [
@@ -340,11 +340,6 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "phoneNumber",
-                  "contactType"
-                ],
                 "properties": {
                   "name": {
                     "description": "Contact's name",
