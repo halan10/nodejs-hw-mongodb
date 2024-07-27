@@ -4,24 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/halan10/nodejs-hw-mongodb.git"
-  },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/halan10/nodejs-hw-mongodb/issues"
-  },
-  "homepage": "https://github.com/halan10/nodejs-hw-mongodb#readme",
   "devDependencies": {
     "@eslint/js": "^9.6.0",
     "eslint": "^9.6.0",
     "globals": "^15.7.0",
     "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.4",
+    "pino-http": "^10.2.0",
+    "pino-pretty": "^11.2.1"
   }
 }
